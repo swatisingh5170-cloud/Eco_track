@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EcoTrack — Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body{
+ background:
+        linear-gradient(180deg,#036b8598,#8e9eab),
+        url("{{ url_for('static', filename='ecotrack.webp') }}") no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>EcoTrack</h1>
+    <p>Track your carbon footprint. Small changes add up.</p>
+
+    <div class="showcase">
+      <div class="card">
+        <img src="{{ url_for('static', filename='hakathon.webp') }}" alt="Hackathon">
+        <h3>Hackathon</h3>
+      </div>
+      <div class="card">
+        <img src="{{ url_for('static', filename='workshop.webp') }}" alt="Workshop">
+        <h3>Workshop</h3>
+      </div>
+      <div class="card">
+        <img src="{{ url_for('static', filename='commute1.webp') }}" alt="Commute">
+        <h3>Commute</h3>
+      </div>
+      <div class="card">
+        <img src="{{ url_for('static', filename='food.webp') }}" alt="Food">
+
+        <h3>Food</h3>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+      <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+    </div>
+  </div>
+</body>
+</html>
+

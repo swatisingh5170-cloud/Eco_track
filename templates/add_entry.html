@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Add Entry | EcoTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>EcoTrack</div>
+    <div><a class="link" href="{{ url_for('dashboard') }}">Back</a></div>
+  </header>
+
+  <div class="container">
+    <h2>Add activity</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for cat,msg in messages %}
+          <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" id="entryForm">
+      <label>Activity</label>
+      <select name="activity" id="activitySelect" required>
+        <option value="">-- Select --</option>
+        {% for a in activities %}
+          <option value="{{ a.id }}" data-factor="{{ a.factor }}" data-unit="{{ a.unit }}">{{ a.name }} ({{ a.unit }})</option>
+        {% endfor %}
+      </select>
+
+      <label>Amount (<span id="unitLabel">unit</span>)</label>
+      <input name="amount" id="amountInput" type="number" step="any" placeholder="Enter amount" required>
+
+      <label>Date</label>
+      <input name="entry_date" type="date" value="{{ '' }}" max="{{ '' }}">
+
+      <div class="preview">Estimated emission: <strong id="emissionPreview">0 kg CO₂</strong></div>
+
+      <button class="btn" type="submit">Add Entry</button>
+    </form>
+  </div>
+
+  <script>
+    // live preview script provided in static/script.js; but we keep a small inline to set up default date
+    document.addEventListener('DOMContentLoaded', function(){
+      // set default date to today
+      var d = new Date().toISOString().slice(0,10);
+      var dateInput = document.querySelector('input[name="entry_date"]');
+      if(dateInput) dateInput.value = d;
+    });
+  </script>
+</body>
+</html>

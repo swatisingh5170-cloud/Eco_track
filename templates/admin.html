@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin | EcoTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Admin - Users and Totals</h2>
+
+    <h3>Totals by user (kg CO₂)</h3>
+    <table class="entries">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Total (kg CO₂)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in totals %}
+        <tr>
+          <td>{{ t.name }}</td>
+          <td>{{ t.email }}</td>
+          <td>{{ "%.3f"|format(t.total_emission) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h3>All users</h3>
+    <table class="entries">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Joined</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.id }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
